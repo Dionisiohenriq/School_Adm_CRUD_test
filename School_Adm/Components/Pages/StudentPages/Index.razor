@@ -1,0 +1,23 @@
+﻿@page "/students"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@inject School_Adm.Data.AppDbContext DB
+@using School_Adm.Models
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="students/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="DB.Students">
+    <PropertyColumn Property="student => student.Title" />
+    <PropertyColumn Property="student => student.Description" />
+
+    <TemplateColumn Context="student">
+        <a href="@($"students/edit?id={student.Id}")">Edit</a> |
+        <a href="@($"students/details?id={student.Id}")">Details</a> |
+        <a href="@($"students/delete?id={student.Id}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
